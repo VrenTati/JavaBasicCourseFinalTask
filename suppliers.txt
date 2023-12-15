@@ -1,0 +1,13 @@
+id|name|email|price|deliver_days
+1|Supplier1|supplier1@example.com|1000|6
+2|Supplier2|supplier2@example.com|1000|6
+3|Supplier3|supplier3@example.com|500|15
+4|Supplier4|supplier4@example.com|800|11
+5|Supplier5|supplier5@example.com|1200|5
+6|Supplier6|supplier6@example.com|750|8
+7|Supplier7|supplier7@example.com|550|9
+8|Supplier8|supplier8@example.com|1860|4
+9|Supplier9|supplier9@example.com|1999|3
+10|Supplier10|supplier10@example.com|1100|5
+11|tryaddsupplier|tryaddsupplier@supplier.com|1000|6
+12|tryaddsupplier|tryaddsupplier@supplier.com|1000|6

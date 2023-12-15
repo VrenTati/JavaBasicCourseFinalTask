@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car Search Results</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body class="bg-light">
+<header th:insert="~{fragments/header.html :: header}"> </header>
+
+<div class="container mt-5">
+    <div class="card text-center">
+        <div class="card-header">
+            Car Search Results
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">No cars found matching your criteria</h5>
+            <p class="card-text">Please consider modifying your search or exploring other options.</p>
+            <a href="/cars" class="btn btn-primary">View All Cars</a>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modifyCharacteristicsModal">
+                Modify Search
+            </button>
+        </div>
+        <div class="card-footer text-muted">
+            Car Show Room
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <img src="/images/cars/total.jpg" alt="Car Dealership" class="img-fluid mb-4" style="min-width: 1300px">
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modifyCharacteristicsModal" tabindex="-1" aria-labelledby="modifyCharacteristicsModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modifyCharacteristicsModalLabel">Modify Characteristics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/client_info" method="post">
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="modelInput" class="form-label">Model:</label>
+                            <input type="text" class="form-control" id="modelInput" name="model" th:value="${client.model}" value="Default Value">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="brandInput" class="form-label">Brand:</label>
+                            <input type="text" class="form-control" id="brandInput" name="brand" th:value="${client.brand}" value="Default Value">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label for="carTypeInput" class="form-label">Car Type:</label>
+                            <input type="text" class="form-control" id="carTypeInput" name="carType" th:value="${client.carType}" value="Default Value">
+                        </div>
+
+                        <div class="mb-3 col-md-6">
+                            <label for="yearInput" class="form-label">Year:</label>
+                            <input type="number" class="form-control" id="yearInput" name="year" th:value="${client.year}" value="0">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fuelTypeInput" class="form-label">Fuel Type:</label>
+                        <input type="text" class="form-control" id="fuelTypeInput" name="fuelType" th:value="${client.fuelType}" value="Default Value">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="transmissionTypeInput" class="form-label">Transmission Type:</label>
+                        <input type="text" class="form-control" id="transmissionTypeInput" name="transmissionType" th:value="${client.transmissionType}" value="Default Value">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fuelConsumptionInput" class="form-label">Fuel Consumption:</label>
+                        <input type="number" class="form-control" id="fuelConsumptionInput" name="fuelConsumption" th:value="${client.maxFuelConsumption}" value="0">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="priceInput" class="form-label">Max Price:</label>
+                        <input type="number" class="form-control" id="priceInput" name="price" th:value="${client.maxPrice}" value="0">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="usedInput" name="used" th:checked="${client.used}">
+                        <label class="form-check-label" for="usedInput">Used</label>
+                    </div>
+
+                    <input type="hidden" name="id" th:value="${client.id}" />
+
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

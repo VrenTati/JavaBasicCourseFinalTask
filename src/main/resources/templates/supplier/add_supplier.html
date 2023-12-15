@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add New Supplier</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<body>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="mb-4">Add New Supplier</h2>
+      <form th:action="@{/add_supplier}" method="post">
+        <div class="mb-3">
+          <label for="supplierName" class="form-label">Supplier Name</label>
+          <input type="text" class="form-control" id="supplierName" name="supplierName" required>
+        </div>
+        <div class="mb-3">
+          <label for="supplierEmail" class="form-label">Supplier Email</label>
+          <input type="email" class="form-control" id="supplierEmail" name="supplierEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Price $:</label>
+          <input type="number" class="form-control" id="price" name="price" required>
+        </div>
+        <div class="form-group">
+          <label for="deliverDays">Deliver Days:</label>
+          <input type="number" class="form-control" id="deliverDays" name="deliverDays" required>
+        </div>
+
+        <div class="container mt-5">
+          <h4 class="mb-3">Cars Supplied</h4>
+          <div class="row">
+            <div th:each="car : ${cars}" class="col-md-4 mb-3">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" th:id="${'car' + car.id}" name="cars"
+                       th:value="${car.id}">
+                <label class="form-check-label" th:for="${'car' + car.id}"
+                       th:text="${car.brand + ' ' + car.model}"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Supplier</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

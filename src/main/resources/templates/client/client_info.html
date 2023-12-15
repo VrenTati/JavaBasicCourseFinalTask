@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Client Details</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<body>
+
+<div class="container mt-5">
+    <h2>Client Details</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Client Name:</strong> <span th:text="${client.name} + ' ' + ${client.lastname}"></span> </p>
+            <p><strong>Client Email:</strong> <span th:text="${client.email}"></span> </p>
+            <p><strong>Model:</strong> <span th:text="${client.model}"></span></p>
+            <p><strong>Brand:</strong> <span th:text="${client.brand}"></span></p>
+            <p><strong>Car Type:</strong> <span th:text="${client.carType}"></span></p>
+            <p><strong>Year:</strong> <span th:text="${client.year}"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Fuel Type:</strong> <span th:text="${client.fuelType}"></span></p>
+            <p><strong>Transmission Type:</strong> <span th:text="${client.transmissionType}"></span></p>
+            <p><strong>Fuel Consumption:</strong> <span th:text="${client.maxFuelConsumption}"></span></p>
+            <p><strong>Max Price:</strong> <span th:text="${client.maxPrice}"></span></p>
+            <p><strong>Used:</strong> <span th:text="${client.used} ? 'Yes' : 'No'"></span></p>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

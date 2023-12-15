@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order Declaration</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<body>
+<div class="container mt-5">
+    <div class="text-center">
+        <h2>Order Declaration</h2>
+        <hr>
+    </div>
+    <div>
+        <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
+        <p><strong>Client Name:</strong> <span th:text="${order.getClient().name} + ' '+ ${order.getClient().lastname}"></span></p>
+        <p><strong>Client Email:</strong> <span th:text="${order.getClient().email}"></span></p>
+        <p><strong>Order created at:</strong> <span th:text="${order.getCreatedAt()}"></span></p>
+        <hr>
+        <p><strong>Supplier:</strong></p>
+        <ul>
+            <li><strong>Name:</strong> <span th:text="${order.getSupplier().name}"></span> </li>
+            <li><strong>Email:</strong> <span th:text="${order.getSupplier().email}"></span> </li>
+            <li><strong>Price:</strong> <span th:text="${order.getSupplier().price} + '$'"></span> </li>
+            <li><strong>Time to deliver:</strong> <span th:text="${order.getSupplier().deliverDays} + ' days'"></span> </li>
+        </ul>
+        <hr>
+        <p><strong>Car Information:</strong></p>
+        <ul>
+            <li><strong>Brand:</strong> <span th:text="${order.getCar().brand}"></span></li>
+            <li><strong>Model:</strong> <span th:text="${order.getCar().model}"></span></li>
+            <li><strong>Car Type:</strong> <span th:text="${order.getCar().carType}"></span></li>
+            <li><strong>Transmission Type:</strong> <span th:text="${order.getCar().transmissionType}"></span></li>
+            <li><strong>Fuel Type:</strong> <span th:text="${order.getCar().fuelType}"></span></li>
+            <li><strong>Fuel Consumption:</strong> <span th:text="${order.getCar().fuelConsumption}"></span></li>
+            <li><strong>Price:</strong> <span th:text="${order.getCar().price} + '$'"></span></li>
+            <li><strong>Used:</strong> <span th:text="${order.getCar().used} ? 'Yes' : 'No'"></span></li>
+            <li><strong>Year:</strong> <span th:text="${order.getCar().year}"></span></li>
+        </ul>
+        <hr>
+        <p class="text-end"><strong>Total Cost:</strong> <span th:text="${order.getSupplier().price + order.getCar().price} + '$'"></span></p>
+        <hr>
+        <p class="text-center">Thank you for your order!</p>
+    </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

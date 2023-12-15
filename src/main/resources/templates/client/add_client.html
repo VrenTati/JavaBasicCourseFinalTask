@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Add New Client</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<body>
+
+<div class="container mt-5">
+  <h2>Add New Client</h2>
+
+  <form action="/add_client" method="post">
+
+    <div class="form-group">
+      <label for="nameInput">Full name:</label>
+      <input type="text" class="form-control" id="nameInput" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label for="emailInput">Email:</label>
+      <input type="text" class="form-control" id="emailInput" name="email" required>
+    </div>
+
+    <div class="form-group">
+      <label for="modelInput">Model:</label>
+      <input type="text" class="form-control" id="modelInput" name="model">
+    </div>
+
+    <div class="form-group">
+      <label for="brandInput">Brand:</label>
+      <input type="text" class="form-control" id="brandInput" name="brand">
+    </div>
+
+    <div class="form-group">
+      <label for="carTypeInput">Car Type:</label>
+      <input type="text" class="form-control" id="carTypeInput" name="carType">
+    </div>
+
+    <div class="form-group">
+      <label for="yearInput">Year:</label>
+      <input type="number" class="form-control" id="yearInput" name="year">
+    </div>
+
+    <div class="form-group">
+      <label for="fuelTypeInput">Fuel Type:</label>
+      <input type="text" class="form-control" id="fuelTypeInput" name="fuelType">
+    </div>
+
+    <div class="form-group">
+      <label for="transmissionTypeInput">Transmission Type:</label>
+      <input type="text" class="form-control" id="transmissionTypeInput" name="transmissionType">
+    </div>
+
+    <div class="form-group">
+      <label for="fuelConsumptionInput">Fuel Consumption:</label>
+      <input type="number" class="form-control" id="fuelConsumptionInput" name="fuelConsumption">
+    </div>
+
+    <div class="form-group">
+      <label for="priceInput">Max Price:</label>
+      <input type="number" class="form-control" id="priceInput" name="price">
+    </div>
+
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="usedInput" name="used">
+      <label class="form-check-label" for="usedInput">Used</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Client</button>
+  </form>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

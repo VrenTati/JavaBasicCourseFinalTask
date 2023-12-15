@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Orders</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<div class="container mt-5">
+    <h2>Orders List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Client Name</th>
+            <th>Client Email</th>
+            <th>Info about car</th>
+            <th>Price</th>
+            <th>More info</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.getClient().name} + ' ' + ${order.getClient().lastname}"></td>
+            <td th:text="${order.getClient().email}"></td>
+            <td th:text="${order.getCar().brand + order.getCar().model}"></td>
+            <td th:text="${order.getCar().price}"></td>
+            <td>
+                <a th:href="@{/order_info/{id}(id=${order.id})}" class="btn btn-primary">Info about order</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

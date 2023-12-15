@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car Info</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="@{'/images/cars/' + ${car.photoPath}}" alt="Car Photo" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h2 th:text="${car.brand + ' ' + car.model}"></h2>
+            <p th:text="${'Price: $' + car.price}"></p>
+
+            <h3>Description:</h3>
+            <!--<p th:text="${car.description}"></p>-->
+            <p>HERE WILL BE CAR DESCRIPTION SOONER OR LATER</p>
+
+            <h3>Characteristics:</h3>
+            <ul>
+                <li th:text="${'Brand: ' + car.brand}"></li>
+                <li th:text="${'Model: ' + car.model}"></li>
+                <li th:text="${'Type: ' + car.carType}"></li>
+                <li th:text="${'Transmission: ' + car.transmissionType}"></li>
+                <li th:text="${'Fuel Type: ' + car.fuelType}"></li>
+                <li th:text="${'Fuel Consumption: ' + car.fuelConsumption}"></li>
+                <li th:text="${'Is used: ' + car.used}"></li>
+            </ul>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal">Do order</button>
+
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div th:each="c : ${cars}" class="col-md-4 mb-3">
+            <div class="card h-100 d-flex flex-column">
+                <img th:src="@{'/images/cars/' + ${c.photoPath}}" alt="Car Photo" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${c.brand + ' ' + c.model}"></h5>
+                    <p class="card-text" th:text="${'Price: $' + c.price}"></p>
+                    <a th:href="@{/car_info/{id}(id=${c.id})}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/order_modul.html::modal}"></div>
+
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

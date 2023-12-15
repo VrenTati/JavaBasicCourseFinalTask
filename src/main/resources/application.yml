@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: root
+    password: KatuXa2281
+    url: jdbc:mysql://localhost:3306/carsalon
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update

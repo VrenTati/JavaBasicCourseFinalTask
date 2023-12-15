@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add New Car</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-4">Add New Car</h2>
+            <form enctype="multipart/form-data" th:action="@{/add_car}" method="post">
+                <div class="mb-3">
+                    <label for="brand" class="form-label">Brand</label>
+                    <input type="text" class="form-control" id="brand" name="brand" required>
+                </div>
+                <div class="mb-3">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" class="form-control" id="model" name="model" required>
+                </div>
+                <div class="mb-3">
+                    <label for="carType" class="form-label">Car Type</label>
+                    <input type="text" class="form-control" id="carType" name="carType" required>
+                </div>
+                <div class="mb-3">
+                    <label for="transmissionType" class="form-label">Transmission Type</label>
+                    <input type="text" class="form-control" id="transmissionType" name="transmissionType" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fuelType" class="form-label">Fuel Type</label>
+                    <input type="text" class="form-control" id="fuelType" name="fuelType" required>
+                </div>
+                <div class="form-group">
+                    <label for="fuelConsumption">Fuel Consumption:</label>
+                    <input type="number" class="form-control" id="fuelConsumption" name="fuelConsumption" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="year">Year:</label>
+                    <input type="number" class="form-control" id="year" name="year" required>
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="used" name="used">
+                    <label class="form-check-label" for="used">Used</label>
+                </div>
+
+                <div class="mb-3">
+                    <h4 class="mb-3">Upload Car Image</h4>
+                    <label for="image" class="form-label">Choose Image</label>
+                    <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                </div>
+
+                <div class=" container mt-5">
+                    <h4 class="mb-3">Suppliers</h4>
+                    <div class="row">
+                        <div th:each="supplier : ${suppliers}" class="col-md-4 mb-3">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" th:id="${supplier.id}" name="suppliers"
+                                       th:value="${supplier.id}">
+                                <label class="form-check-label" th:for="${'supplier' + supplier.id}"
+                                       th:text="${supplier.name}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Car</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

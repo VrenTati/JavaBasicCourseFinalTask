@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>View All Suppliers</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<header th:insert="~{fragments/header.html :: header}"></header>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">All Suppliers</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Supplier Name</th>
+                    <th>Email</th>
+                    <th>Price</th>
+                    <th>Delivery Days</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="supplier : ${suppliers}">
+                    <td th:text="${supplier.name}"></td>
+                    <td th:text="${supplier.email}"></td>
+                    <td th:text="${supplier.price}"></td>
+                    <td th:text="${supplier.deliverDays}"></td>
+                    <td>
+                        <button class="btn btn-secondary" data-bs-toggle="modal" th:attr="data-bs-target='#orderModal' + ${supplier.id}">Modify Supplier</button>
+                    </td>
+                    <div class="modal fade" th:id="'orderModal' + ${supplier.id}" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true" th:fragment="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/supplier_info" method="post">
+                                        <label th:text="${supplier.name + ' ' + supplier.email}"></label>
+                                        <div class="form-group">
+                                            <label for="price">Price $:</label>
+                                            <input type="number" class="form-control" th:value="${supplier.price}" id="price" name="price" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="deliverDays">Delivery Days:</label>
+                                            <input type="number" class="form-control" th:value="${supplier.deliverDays}" id="deliverDays" name="deliverDays" required>
+                                        </div>
+                                        <div class="container mt-5">
+                                            <h4 class="mb-3">Cars Supplied</h4>
+                                            <div class="row">
+                                                <div th:each="car : ${cars}" class="col-md-4 mb-3">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" th:id="${'car' + car.id}" name="cars"
+                                                               th:value="${car.id}" th:checked="${supplierCar.getCarsBySupplier(supplier).contains(car.id)}">
+                                                        <label class="form-check-label" th:for="${'car' + car.id}"
+                                                               th:text="${car.brand + ' ' + car.model}"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="id" th:value="${supplier.id}" />
+                                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

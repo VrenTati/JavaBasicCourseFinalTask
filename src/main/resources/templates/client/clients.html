@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Clients</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+<div class="container mt-5">
+    <h2>Clients List</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Max Price</th>
+            <th>Action</th>
+            <th>Action</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.name} + ' ' + ${client.lastname}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.maxPrice}"></td>
+            <td>
+                <a th:href="@{/car_filter/{id}(id=${client.id})}" class="btn btn-primary">Select Cars</a>
+            </td>
+            <td>
+                <a th:href="@{/client_info/{id}(id=${client.id})}" class="btn btn-primary">Info about client</a>
+            </td>
+            <td>
+                <a th:href="@{/delete_client/{id}(id=${client.id})}" class="btn btn-danger">Delete client</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car List</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body>
+<header th:insert="~{fragments/header.html :: header}"> </header>
+
+<div class="container mt-5">
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modifyCharacteristicsModal">
+        Modify Search
+    </button>
+    <div class="row">
+        <div th:each="c : ${cars}" class="col-md-4 mb-3">
+            <div class="card h-100 d-flex flex-column">
+                <img th:src="@{'/images/cars/' + ${c.photoPath}}" alt="Car Photo">
+
+                <div class="card-body flex-fill">
+                    <h5 class="card-title" th:text="${c.brand + ' ' + c.model}"></h5>
+                    <a th:href="@{/car_info/{id}(id=${c.id})}" class="btn btn-primary">View Details</a>
+                    <button class="btn btn-primary" data-bs-toggle="modal" th:attr="data-bs-target='#orderModal' + ${c.id}">Do order</button>
+
+
+                    <div class="modal fade" th:id="'orderModal' + ${c.id}" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true" th:fragment="modal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="orderModalLabel">Order Details</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 th:text="${c.brand + ' ' + c.model + ' ' + c.price + '$'}"></h4>
+                                    <ul>
+                                        <li th:text="${'Brand: ' + c.brand}"></li>
+                                        <li th:text="${'Model: ' + c.model}"></li>
+                                        <li th:text="${'Type: ' + c.carType}"></li>
+                                        <li th:text="${'Transmission: ' + c.transmissionType}"></li>
+                                        <li th:text="${'Fuel Type: ' + c.fuelType}"></li>
+                                        <li th:text="${'Fuel Consumption: ' + c.fuelConsumption}"></li>
+                                        <li th:text="${'Is used: ' + c.used}"></li>
+                                    </ul>
+
+                                    <form action="/submit_order" method="post" class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label for="supplierSelect" class="form-label">Select Supplier:</label>
+                                                <select class="form-select" id="supplierSelect" name="supplierId" required>
+                                                    <option th:each="supplier : ${supp.getCarSuppliers(c.id)}" th:value="${supplier.id}" th:text="${supplier.name} + ' ' + ${supplier.price} + ' ' + ${supplier.deliverDays}"></option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label> Selected Client:</label>
+                                                <input type="hidden" name="clientId" th:value="${client.id}" th:text="${client.name} + ' ' + ${client.lastname}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label for="receiptInput" class="form-label">Receipt Information:</label>
+                                                <textarea class="form-control" id="receiptInput" name="receipt" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="carId" th:value="${c.id}">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Submit Order</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="~{fragments/modify_client.html::#modifyCharacteristicsModal}"></div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+</body>
+</html>

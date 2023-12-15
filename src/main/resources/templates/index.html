@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Car Dealership</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/dist/css/bootstrap.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img src="/images/cars/total.jpg" alt="Car Dealership" class="img-fluid mb-4">
+            <h1 class="display-4 mb-4 ms-auto">..........................Welcome to the Car Dealership</h1>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="border p-3 rounded">
+                <h4 class="mb-4">Menu</h4>
+                <div class="d-grid gap-2">
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/cars'}">View All Cars</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/clients'}">View All Clients</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/purchased_cars'}">View Purchased Cars</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/add_client'}">Add New Client</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/add_car'}">Add New Car</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/add_supplier'}">Add New Supplier</a>
+                    <a class="btn btn-outline-primary btn-block" th:href="@{'/all_suppliers'}">All Suppliers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="border p-3 rounded h-100 d-flex flex-column ">
+                <p class="lead mb-4 ">"This web application serves as a comprehensive tool for automotive dealership employees, facilitating
+                    seamless interaction with clients and streamlining various tasks. From managing customer information to
+                    assisting in the selection of vehicles, this application is designed to enhance the overall workflow
+                    within the dealership. With features tailored for both clients and staff, including the ability to view
+                    and add cars, manage client data, and handle purchases, the application provides a user-friendly
+                    interface to ensure a smooth and efficient operation in the automotive sales environment."</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/bootstrap/5.3.2/dist/js/bootstrap.bundle.js}"></script>
+
+</body>
+</html>
